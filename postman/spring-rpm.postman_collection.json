@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "58edd9ec-e366-4db3-802d-10016bd7501c",
+		"name": "spring-rpm",
+		"description": "Spring RPM postman ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:9080/actuator/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"actuator",
+						"health"
+					]
+				},
+				"description": "health endpoint"
+			},
+			"response": []
+		}
+	]
+}
