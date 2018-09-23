@@ -6,7 +6,7 @@
 
     <groupId>fun.java</groupId>
     <artifactId>spring-rpm</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <properties>
         <spring.boot.version>2.0.5.RELEASE</spring.boot.version>
@@ -40,11 +40,41 @@
             </plugin>
 
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>rpm-maven-plugin</artifactId>
+                <version>2.2.0</version>
+                <configuration>
+                    <group>Application/System</group>
+                    <sourceEncoding>UTF</sourceEncoding>
+                    <packager>SWWDC</packager>
+                    <vendor>rpm</vendor>
+                    <mappings>
+                        <mapping>
+                            <directory>/opt/app</directory>
+                            <sources>
+                                <source>
+                                    <location>target/${artifactId}.jar</location>
+                                </source>
+                            </sources>
+                        </mapping>
+                    </mappings>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-rpm</id>
+                        <goals>
+                            <goal>rpm</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok-maven-plugin</artifactId>
                 <version>1.18.0.0</version>
             </plugin>
         </plugins>
+        <finalName>${artifactId}</finalName>
     </build>
 
     <dependencies>
