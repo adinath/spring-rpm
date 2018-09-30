@@ -57,6 +57,14 @@
                                 </source>
                             </sources>
                         </mapping>
+                        <mapping>
+                            <directory>/etc/${artifactId}/config</directory>
+                            <sources>
+                                <source>
+                                    <location>src/main/resources/security.config</location>
+                                </source>
+                            </sources>
+                        </mapping>
                     </mappings>
                 </configuration>
                 <executions>
