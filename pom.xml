@@ -40,6 +40,27 @@
             </plugin>
 
             <plugin>
+                <groupId>de.douglas.maven.plugin</groupId>
+                <artifactId>rpm-systemd-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>generate-systemd-file</goal>
+                            <goal>generate-rpm-postinst-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <description>${project.artifactId}</description>
+                    <runnableJarPath>/opt/app/${project.artifactId}.${project.packaging}</runnableJarPath>
+                    <environmentFilePath>
+                        /etc/sysconfig/${project.artifactId}
+                    </environmentFilePath>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>rpm-maven-plugin</artifactId>
                 <version>2.2.0</version>
@@ -65,7 +86,32 @@
                                 </source>
                             </sources>
                         </mapping>
+                        <mapping>
+                            <directory>/etc/sysconfig/${project.artifactId}</directory>
+                            <sources>
+                                <source>
+                                    <location>src/main/resources/${project.artifactId}</location>
+                                </source>
+                            </sources>
+                        </mapping>
+                        <mapping>
+                            <directory>/usr/lib/systemd/system</directory>
+                            <sources>
+                                <source>
+                                    <location>
+                                        ${project.build.directory}/rpm-systemd-maven-plugin/${project.artifactId}.service
+                                    </location>
+                                </source>
+                            </sources>
+                            <directoryIncluded>false</directoryIncluded>
+                            <configuration>false</configuration>
+                        </mapping>
                     </mappings>
+
+                    <postinstallScriptlet>
+                        <scriptFile>target/rpm-systemd-maven-plugin/postinst</scriptFile>
+                        <fileEncoding>utf-8</fileEncoding>
+                    </postinstallScriptlet>
                 </configuration>
                 <executions>
                     <execution>
