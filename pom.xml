@@ -44,7 +44,7 @@
                 <artifactId>rpm-systemd-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>generate-resources</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>generate-systemd-file</goal>
                             <goal>generate-rpm-postinst-file</goal>
@@ -78,6 +78,15 @@
                                 </source>
                             </sources>
                         </mapping>
+
+                        <mapping>
+                            <directory>/opt/app</directory>
+                            <sources>
+                                <source>
+                                    <location>src/main/resources/${project.artifactId}.conf</location>
+                                </source>
+                            </sources>
+                        </mapping>
                         <mapping>
                             <directory>/etc/${artifactId}/config</directory>
                             <sources>
@@ -104,7 +113,7 @@
                                 </source>
                             </sources>
                             <directoryIncluded>false</directoryIncluded>
-                            <configuration>false</configuration>
+                            <configuration>true</configuration>
                         </mapping>
                     </mappings>
 
