@@ -74,7 +74,7 @@
                             <directory>/opt/app</directory>
                             <sources>
                                 <source>
-                                    <location>target/${artifactId}.jar</location>
+                                    <location>target/${project.artifactId}.jar</location>
                                 </source>
                             </sources>
                         </mapping>
@@ -88,7 +88,7 @@
                             </sources>
                         </mapping>
                         <mapping>
-                            <directory>/etc/${artifactId}/config</directory>
+                            <directory>/etc/${project.artifactId}/config</directory>
                             <sources>
                                 <source>
                                     <location>src/main/resources/security.config</location>
@@ -137,7 +137,7 @@
                 <version>1.18.0.0</version>
             </plugin>
         </plugins>
-        <finalName>${artifactId}</finalName>
+        <finalName>${project.artifactId}</finalName>
     </build>
 
     <dependencies>

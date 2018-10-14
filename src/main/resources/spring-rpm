@@ -1,2 +1,1 @@
-ARG1=-o
-ARG2=--verbose
+JAVA_OPTS=-D
